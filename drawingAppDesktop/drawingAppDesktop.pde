@@ -49,10 +49,10 @@ void setup() {
   
   pizza = loadImage("pizzaColoring.jpg");
   
-  if (height / 1.75 - 1 > 255 + 2 * redLineY) {
-    controlHeight = height / 1.75 - 1;
+  if ((height / 1.75 / 2) + redLineY > 255 + 2 * redLineY) {
+    controlHeight = (height / 1.75) / 2 + 2 * redLineY;
   } else {
-    controlHeight = redLineY + 255;
+    controlHeight = 2 * redLineY + 255;
   }
 }
 
@@ -119,7 +119,7 @@ void draw() {
       pressed = true;
     }
     
-    if (mouseY >= controlHeight / 2) {
+    if (mouseY >= controlHeight) {
       fill(red, green, blue);
       if (lastDrawX > 0 && lastDrawY > 0) {
         checkTouch(mouseX, mouseY);
@@ -191,7 +191,7 @@ void drawControls() {
   rect(width / 2, controlHeight / 2, width, controlHeight);
   
   fill(red, green, blue);
-  ellipse(width * 0.78, controlHeight / 4, size, size);
+  ellipse(width * 0.78, controlHeight / 2, size, size);
   
   fill(255);
   rect(width * 0.50, height * 0.08, buttonWidth, buttonHeight, 10);
