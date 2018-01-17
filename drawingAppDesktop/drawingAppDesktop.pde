@@ -150,7 +150,7 @@ void drawControls() {
   rect(width * 0.5, buttonY, buttonWidth, buttonHeight, 10);
 
   fontCalculator("clear", buttonWidth, buttonHeight);
-  text("clear", width * 0.5, buttonY * 2 + buttonSpacing + buttonHeight / 8, buttonWidth, buttonHeight);
+  text("clear", width * 0.5 - buttonWidth / 2, buttonY * 2 + buttonSpacing + buttonHeight / 6);
 
   noStroke();
 }
