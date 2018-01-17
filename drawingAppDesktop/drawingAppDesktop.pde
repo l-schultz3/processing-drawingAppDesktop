@@ -2,16 +2,16 @@ float redLineX, redDotY; //variables for red slider
 float greenLineX, greenDotY; //variables for green slider
 float blueLineX, blueDotY; //variables for blue slider
 float sizeLineX, sizeDotY; //variables for size slider
-float buttonWidth, buttonHeight, buttonSpacing, buttonY; //variables for white, black and clear buttons
+float buttonWidth, buttonHeight, buttonSpacing, buttonY; //variables for white, black and other buttons
 float lineLength = 255, lineY, size, controlHeight;
 float red, green, blue; //variables for the colour values
 
 int sliderSize = 40; //size of the knob on sliders
 
 void setup() {
+  fullScreen();
   background(255);
   rectMode(CENTER);
-  fullScreen();
 
   redLineX = width * 0.125; 
   redDotY = height * 0.04;
@@ -26,7 +26,7 @@ void setup() {
   sizeDotY = height * 0.04 + 100;
 
   buttonY = height * 0.08;
-
+  
   buttonWidth = width * 0.08;
   buttonHeight = height * 0.06;
   buttonSpacing = height * 0.08;
@@ -39,43 +39,47 @@ void setup() {
 void draw() {
   if (mousePressed) {
     if ((mouseX > redLineX - sliderSize / 2 && mouseX < redLineX + sliderSize / 2) && (mouseY > lineY && mouseY < lineY + lineLength)) {
-      if (redDotY >= lineY && redDotY <= lineY + lineLength) {
+      //if mouse is over red slider
+      if (redDotY >= lineY && redDotY <= lineY + lineLength) { //if slider is over line
         redDotY = mouseY;
-      } else {
-        if (redDotY < lineY) {
-          redDotY = lineY;
-        } else {
-          redDotY = lineY + lineLength;
+      } else { //if slider isn't over line
+        if (redDotY < lineY) { //if slider above line
+          redDotY = lineY; //go to max value
+        } else { //if slider under line
+          redDotY = lineY + lineLength; //go to min value
         }
       }
     } else if ((mouseX > greenLineX - sliderSize / 2 && mouseX < greenLineX + sliderSize / 2) && (mouseY > lineY && mouseY < lineY + lineLength)) {
-      if (greenDotY >= lineY && greenDotY <= lineY + lineLength) {
+      //if mouse is over green slider
+      if (greenDotY >= lineY && greenDotY <= lineY + lineLength) { //if slider is over line
         greenDotY = mouseY;
-      } else {
-        if (greenDotY < lineY) {
-          greenDotY = lineY;
-        } else {
-          greenDotY = lineY + lineLength;
+      } else { //if slider isn't over line
+        if (greenDotY < lineY) { //if slider above line
+          greenDotY = lineY; //go to max value
+        } else { //if slider under line
+          greenDotY = lineY + lineLength; //go to min value
         }
       }
     } else if ((mouseX > blueLineX - sliderSize / 2 && mouseX < blueLineX + sliderSize / 2) && (mouseY > lineY && mouseY < lineY + lineLength)) {
-      if (blueDotY >= lineY && blueDotY <= lineY + lineLength) {
+      //if mouse is over blue slider
+      if (blueDotY >= lineY && blueDotY <= lineY + lineLength) { //if slider is over line
         blueDotY = mouseY;
-      } else {
-        if (blueDotY < lineY) {
-          blueDotY = lineY;
-        } else {
-          blueDotY = lineY + lineLength;
+      } else { //if slider isn't over line
+        if (blueDotY < lineY) { //if slider above line
+          blueDotY = lineY; //go to max value
+        } else { //if slider under line
+          blueDotY = lineY + lineLength; //go to min value
         }
       }
     } else if ((mouseX > sizeLineX - sliderSize / 2 && mouseX < sizeLineX + sliderSize / 2) && (mouseY > lineY && mouseY < lineY + lineLength)) {
-      if (sizeDotY >= lineY && sizeDotY <= lineY + lineLength) {
+      //if mouse is over size slider
+      if (sizeDotY >= lineY && sizeDotY <= lineY + lineLength) { //if slider is over line
         sizeDotY = mouseY;
-      } else {
-        if (sizeDotY < lineY) {
-          sizeDotY = lineY;
-        } else {
-          sizeDotY = lineY + lineLength;
+      } else { //if slider isn't over line
+        if (sizeDotY < lineY) { //if slider above line
+          sizeDotY = lineY; //go to max value
+        } else { //if slider under line
+          sizeDotY = lineY + lineLength; //go to min value
         }
       }
     } else if ((mouseX > (width * 0.5 - buttonWidth / 2) && mouseX < (width * 0.5 + buttonWidth / 2)) && (mouseY > (buttonY - buttonHeight / 2) && mouseY < (buttonY + buttonHeight / 2))) {
@@ -94,7 +98,7 @@ void draw() {
       line(mouseX, mouseY, pmouseX, pmouseY);
     }
   }
-
+  
   drawControls();
   sliders();
 }
@@ -131,21 +135,21 @@ void drawControls() {
   fill(255);
   stroke(0);
   strokeWeight(1);
-  rect(width / 2, controlHeight / 2, width, controlHeight);
+  rect(width / 2, controlHeight / 2, width, controlHeight); //draws background for control panel
 
-  fill(red, green, blue);
+  fill(red, green, blue); //displays colour and size of pen
   ellipse(width * 0.78, controlHeight / 2, size, size);
 
-  fill(0);
+  fill(0); //black button
   rect(width * 0.5, buttonY + buttonSpacing, buttonWidth, buttonHeight, 10);
 
-  fill(127);
+  fill(127); //grey button
   rect(width * 0.5, buttonY + 2 * buttonSpacing, buttonWidth, buttonHeight, 10);
 
-  fill(255);
+  fill(255); //white button
   rect(width * 0.5, buttonY, buttonWidth, buttonHeight, 10);
 
-  textSize(height * 0.04);
+  fontCalculator("clear", buttonWidth, buttonHeight);
   text("clear", width * 0.5, buttonY * 2 + buttonSpacing + buttonHeight / 8, buttonWidth, buttonHeight);
 
   noStroke();
